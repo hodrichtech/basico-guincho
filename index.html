@@ -3,41 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guincho & Socorro 24h (Demonstrativo) — Cartão Digital (Plano Básico)</title>
+  <title>Guincho & Socorro 24h (Demonstrativo) — Cartão Comercial Digital 1 Tela</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --bg: #070a12;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --primary: #10b981;
+      --primary-glow: rgba(16, 185, 129, 0.3);
+      --accent: #38bdf8;
+      --text: #f8fafc;
+      --text-sub: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+    }
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
-    body { background: #070a12; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
-    .card { max-width: 440px; width: 100%; background: rgba(15,23,42,0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 28px; padding: 36px 24px; backdrop-filter: blur(16px); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-    .badge-tier { display: inline-block; background: rgba(59,130,246,0.15); border: 1px solid #3b82f6; color: #60a5fa; font-size: 0.75rem; font-weight: 800; padding: 4px 14px; border-radius: 20px; margin-bottom: 20px; text-transform: uppercase; }
-    .avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid #3b82f6; margin-bottom: 16px; box-shadow: 0 8px 20px rgba(59,130,246,0.3); }
-    .name { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .nicho { font-size: 0.92rem; color: #38bdf8; font-weight: 700; margin-bottom: 12px; }
-    .desc { font-size: 0.88rem; color: #94a3b8; line-height: 1.5; margin-bottom: 24px; }
-    .btn-wa { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: linear-gradient(135deg, #25D366, #16a34a); color: #fff; text-decoration: none; padding: 16px; border-radius: 16px; font-weight: 800; font-size: 1.05rem; box-shadow: 0 10px 25px rgba(37,211,102,0.3); transition: transform 0.2s; margin-bottom: 16px; }
-    .btn-wa:hover { transform: translateY(-2px); }
-    .meta-info { font-size: 0.82rem; color: #64748b; margin-top: 12px; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 60px; }
+    
+    .hero-banner { width:100%; height:240px; background-size:cover; background-position:center; position:relative; }
+    .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,10,18,0.2) 0%, #070a12 100%); }
+    
+    .container { max-width: 640px; margin:0 auto; padding: 0 20px; position:relative; z-index:2; text-align: center; }
+    
+    .profile-box { margin-top: -80px; margin-bottom: 24px; }
+    .avatar { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary); box-shadow: 0 10px 30px var(--primary-glow); margin-bottom: 16px; }
+    
+    .badge-tier { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.12); border: 1px solid var(--primary); color: #6ee7b7; font-size: 0.78rem; font-weight: 800; padding: 6px 16px; border-radius: 30px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .name { font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 6px; line-height: 1.15; }
+    .nicho { font-size: 1rem; color: var(--accent); font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .desc { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; margin-bottom: 28px; background: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: 20px; backdrop-filter: blur(12px); text-align: left; }
+    
+    /* ACTION BUTTONS GRID */
+    .action-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 28px; }
+    
+    .btn-wa-main { display: flex; align-items: center; justify-content: center; gap: 12px; background: linear-gradient(135deg, #25D366, #16a34a); color: #fff; text-decoration: none; padding: 18px 24px; border-radius: 18px; font-weight: 800; font-size: 1.15rem; box-shadow: 0 10px 25px rgba(37,211,102,0.35); transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-wa-main:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(37,211,102,0.45); }
+    
+    .sec-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+    .btn-sec { background: var(--card-bg); border: 1px solid var(--border); color: #fff; text-decoration: none; padding: 14px; border-radius: 14px; font-size: 0.88rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 8px; backdrop-filter: blur(10px); transition: background 0.2s; }
+    .btn-sec:hover { background: rgba(255,255,255,0.1); border-color: var(--accent); }
+
+    /* INFO TILES */
+    .info-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 22px; margin-bottom: 28px; text-align: left; backdrop-filter: blur(12px); display: grid; gap: 16px; }
+    .info-item { display: flex; align-items: flex-start; gap: 14px; }
+    .info-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(56, 189, 248, 0.12); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .info-title { font-size: 0.8rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; margin-bottom: 2px; }
+    .info-val { font-size: 0.95rem; font-weight: 600; color: #fff; }
+
+    /* SOCIAL LINKS & QR CODE */
+    .social-group { display: flex; justify-content: center; gap: 14px; margin-bottom: 28px; }
+    .social-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; text-decoration: none; transition: transform 0.2s; }
+    .social-btn:hover { transform: scale(1.1); }
+    .social-btn.insta { color: #e1306c; border-color: rgba(225,48,108,0.3); }
+    .social-btn.yt { color: #ef4444; border-color: rgba(239,68,68,0.3); }
+    .social-btn.fb { color: #1877f2; border-color: rgba(24,119,242,0.3); }
+
+    .qr-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 24px; backdrop-filter: blur(12px); display: inline-flex; flex-direction: column; align-items: center; gap: 12px; }
+    .qr-img { width: 130px; height: 130px; border-radius: 12px; background: #fff; padding: 6px; }
+
+    footer { margin-top: 40px; color: var(--text-sub); font-size: 0.85rem; }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 700; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="badge-tier">Plano Básico — Cartão Comercial Digital 1 Tela</div>
-    <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=300&auto=format&fit=crop&q=80" class="avatar" alt="Guincho & Socorro 24h (Demonstrativo)">
-    <h1 class="name">Guincho & Socorro 24h (Demonstrativo)</h1>
-    <div class="nicho">Auto Socorro, Reboque & Carga de Bateria</div>
-    <p class="desc">Atendimento emergencial de guincho plataforma para carros, motos e utilitários. Carga rápida de bateria e troca de pneu no local.</p>
-
-    <a href="https://wa.me/5513996351877?text=Ol%C3%A1!%20Vim%20pelo%20seu%20Cart%C3%A3o%20Digital" target="_blank" class="btn-wa">
-      <i class="fa-brands fa-whatsapp fa-xl"></i> Atendimento no WhatsApp
-    </a>
-
-    <div class="meta-info">
-      <div><i class="fa-regular fa-clock"></i> Segunda a Domingo — Plantão 24 Horas</div>
-      <div><i class="fa-solid fa-location-dot"></i> São Paulo & Grande SP</div>
-    </div>
+  <div class="hero-banner" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&auto=format&fit=crop&q=80');">
+    <div class="hero-overlay"></div>
   </div>
-  <div style="margin-top:24px;"><a href="/" style="color:#64748b; text-decoration:none; font-size:0.85rem;">⚡ Vitrine Digital — Conheça outros planos</a></div>
+
+  <div class="container">
+    <div class="profile-box">
+      <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=300&auto=format&fit=crop&q=80" class="avatar" alt="Guincho & Socorro 24h (Demonstrativo)">
+      <div>
+        <span class="badge-tier"><i class="fa-solid fa-circle-check"></i> Cartão Digital Comercial 1 Tela — Plano Básico</span>
+        <h1 class="name">Guincho & Socorro 24h (Demonstrativo)</h1>
+        <div class="nicho"><i class="fa-solid fa-briefcase"></i> Auto Socorro, Reboque & Carga de Bateria</div>
+      </div>
+    </div>
+
+    <!-- SOBRE O ATENDIMENTO -->
+    <div class="desc">
+      <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-shield-halved" style="color:var(--primary);"></i> Apresentação & Atendimento Especializado
+      </div>
+      Atendimento emergencial de guincho plataforma para carros, motos e utilitários. Carga rápida de bateria e troca de pneu no local.
+    </div>
+
+    <!-- BARRA DE AÇÕES RÁPIDAS -->
+    <div class="action-grid">
+      <a href="https://wa.me/5513996351877?text=Ol%C3%A1!%20Vim%20pelo%20seu%20Cart%C3%A3o%20Digital" target="_blank" class="btn-wa-main">
+        <i class="fa-brands fa-whatsapp fa-xl"></i> Chamar no WhatsApp (5513996351877)
+      </a>
+
+      <div class="sec-actions">
+        <a href="tel:5513996351877" class="btn-sec">
+          <i class="fa-solid fa-phone" style="color:#10b981;"></i> Ligar Agora
+        </a>
+        <a href="https://www.google.com/maps?q=Sao+Paulo+SP" target="_blank" class="btn-sec">
+          <i class="fa-solid fa-map-location-dot" style="color:#ef4444;"></i> Google Maps
+        </a>
+        <button type="button" onclick="shareCard()" class="btn-sec">
+          <i class="fa-solid fa-share-nodes" style="color:#38bdf8;"></i> Compartilhar
+        </button>
+      </div>
+    </div>
+
+    <!-- CARDS DE INFORMAÇÕES DE CONTATO -->
+    <div class="info-card">
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-regular fa-clock"></i></div>
+        <div>
+          <span class="info-title">Horários de Atendimento</span>
+          <span class="info-val">Segunda a Domingo — Plantão 24 Horas</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div>
+          <span class="info-title">Área de Cobertura / Endereço</span>
+          <span class="info-val">Bases operacionais na Marginal Pinheiros e Tietê</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- REDES SOCIAIS -->
+    
+      <div class="social-group">
+        <a href="https://instagram.com/guinchosocorro24h_demo" target="_blank" class="social-btn insta"><i class="fa-brands fa-instagram"></i></a>
+        
+        <a href="https://facebook.com/guinchosocorrodemo" target="_blank" class="social-btn fb"><i class="fa-brands fa-facebook"></i></a>
+      </div>
+    
+
+    <!-- QR CODE DE COMPARTILHAMENTO -->
+    <div class="qr-box">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fwa.me%2F5513996351877" class="qr-img" alt="QR Code de Contato">
+      <span style="font-size:0.82rem; font-weight:700; color:var(--text-sub);">Escaneie o QR Code para abrir no WhatsApp</span>
+    </div>
+
+    <footer>
+      ⚡ Desenvolvido por <a href="/">Vitrine Digital — Hodrich Digital</a>
+    </footer>
+  </div>
+
+  <script>
+    function shareCard() {
+      if (navigator.share) {
+        navigator.share({
+          title: "Guincho & Socorro 24h (Demonstrativo)",
+          text: "Confira o Cartão Comercial Digital de Guincho & Socorro 24h (Demonstrativo)",
+          url: window.location.href
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link do Cartão Digital copiado com sucesso!');
+      }
+    }
+  </script>
 </body>
 </html>
